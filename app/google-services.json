@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "782891196207",
+    "firebase_url": "https://shift-inspector-6a385.firebaseio.com",
+    "project_id": "shift-inspector-6a385",
+    "storage_bucket": "shift-inspector-6a385.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:782891196207:android:a05545d9da76c9ee",
+        "android_client_info": {
+          "package_name": "com.ortaib.shiftinspector"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "782891196207-l3fravqbmoj4j2htas7bnqljnkopqn3u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ortaib.shiftinspector",
+            "certificate_hash": "f92a95a012636cbe6b1b444b1e48d5c89c14ead1"
+          }
+        },
+        {
+          "client_id": "782891196207-q0e8gpgv2g70j8tvslov0fqgk96epbrd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvs_iAu1m5taeNULBdE0bidDm5AJAnYpg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "782891196207-q0e8gpgv2g70j8tvslov0fqgk96epbrd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
