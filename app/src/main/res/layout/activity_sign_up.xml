@@ -36,34 +36,7 @@
             android:text="Profile type"
             android:textStyle="bold"
             android:textSize="30dp"/>
-        <RadioGroup
-            android:id="@+id/profile_type"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            android:gravity="center"
-            >
 
-            <RadioButton
-                android:id="@+id/employer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="employer"
-                android:textSize="20dp"
-                android:checked="true"
-                />
-            <RadioButton
-                android:id="@+id/employee"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:text="employee"
-                android:textSize="20dp"
-                android:checked="false"
-                />
-
-        </RadioGroup>
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -100,16 +73,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/round_edit_text"
-            android:gravity="center_horizontal"
-            android:hint="password"
-            android:inputType="textPassword"
-            android:maxLines="1" />
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/round_edit_text"
+                android:gravity="center_horizontal"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:maxLines="1" />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"

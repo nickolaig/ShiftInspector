@@ -1,14 +1,63 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
     tools:context="com.ortaib.shiftinspector.Tabs.AddShiftFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_gravity="center"
+        android:src="@drawable/work"/>
     <TextView
+        android:id="@+id/message"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello from fragment 2"
-        android:textSize="50dp"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textStyle="italic"
+        android:textSize="20dp"
+        android:textColor="#F00"
+        android:text="u r in a shift"
+        android:gravity="center"/>
+    <Button
+        android:id="@+id/start_btn"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:background="@color/secondaryLightColor"
+        android:textColor="@color/tabTextColor"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:text="Enter Shift"
+        android:layout_gravity="center"/>
 
-</FrameLayout>
+    <Button
+        android:id="@+id/finish_btn"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/tabTextColor"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:text="Finish Shift"
+        android:layout_gravity="center"/>
+    <Button
+        android:id="@+id/add_manualy_btn"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:background="#0000ff"
+        android:textColor="@color/tabTextColor"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:text="Add Shift Manualy"
+        android:layout_gravity="center"/>
+
+</LinearLayout>

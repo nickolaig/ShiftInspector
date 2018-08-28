@@ -15,10 +15,13 @@ public class DBHelper {
         this.context = context;
     }
 
-    public static void addUser(final String name,final String email,final double wage,final String profileType,String userid){
-
-        User user = new User(name,email,wage,profileType);
-
-        mDatabase.child("users").child(userid).setValue(user);
+    public static void addUser(final String name,final String email,final double wage){
+        User user = new User(name,email,wage);
+        final String emailKey = user.getEmail().replace(".","_dot_");
+        mDatabase.child("users").child(emailKey).setValue(user);
+    }
+    public static void editUser(User user){
+        final String emailKey = user.getEmail().replace(".","_dot_");
+        mDatabase.child("users").child(emailKey).setValue(user);
     }
 }

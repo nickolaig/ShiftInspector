@@ -33,42 +33,33 @@ public class SignUpActivity extends AppCompatActivity {
 
     //set up UI VIEWS
     private Button signUpBtn;
-    private EditText nameET,emailET,wageET,passwordET;
-    private RadioGroup profileType;
-    private View progressView,signUpForm;
+    private EditText nameET, emailET, wageET, passwordET;
+    private View progressView, signUpForm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        mAuth           = FirebaseAuth.getInstance();
-        nameET          = (EditText) findViewById(R.id.name);
-        emailET         = (EditText) findViewById(R.id.email);
-        wageET          = (EditText) findViewById(R.id.hourly_wage);
-        passwordET      = (EditText) findViewById(R.id.password);
-        profileType     = (RadioGroup) findViewById(R.id.profile_type);
-        progressView   = (View) findViewById(R.id.sign_up_progress);
-        signUpForm      = (View) findViewById(R.id.sign_up_form);
-        signUpBtn       = (Button) findViewById(R.id.sign_up_btn);
+        mAuth = FirebaseAuth.getInstance();
+        nameET = (EditText) findViewById(R.id.name);
+        emailET = (EditText) findViewById(R.id.email);
+        wageET = (EditText) findViewById(R.id.hourly_wage);
+        passwordET = (EditText) findViewById(R.id.password);
+        progressView = (View) findViewById(R.id.sign_up_progress);
+        signUpForm = (View) findViewById(R.id.sign_up_form);
+        signUpBtn = (Button) findViewById(R.id.sign_up_btn);
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 attempSignUp();
             }
         });
-        profileType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if(checkedId == R.id.employer)
-                    wageET.setVisibility(View.GONE);
-                else
-                    wageET.setVisibility(View.VISIBLE);
-            }
-        });
+
     }
 
-    protected void attempSignUp(){
+    protected void attempSignUp() {
         emailET.setError(null);
         passwordET.setError(null);
         //store views data
@@ -76,26 +67,23 @@ public class SignUpActivity extends AppCompatActivity {
         String email = emailET.getText().toString();
         String password = passwordET.getText().toString();
         String stringWage = wageET.getText().toString();
-        String type = getType(profileType);
-        Double wage = -1.0; //employer doesnt have this attribute
-        if(type.equals("employee")){
-            if(isWageValid(stringWage)){
-                wage = Double.parseDouble(stringWage);
-            }
+        Double wage = 0.0;
+        if (isWageValid(stringWage)) {
+            wage = Double.parseDouble(stringWage);
         }
         boolean cancel = false;
         View focusView = null;
 
-        if(TextUtils.isEmpty(name)){
+        if (TextUtils.isEmpty(name)) {
             nameET.setError("This field is required");
             focusView = nameET;
             cancel = true;
         }
-        if(TextUtils.isEmpty(email)){
+        if (TextUtils.isEmpty(email)) {
             emailET.setError("This field is required");
             focusView = emailET;
             cancel = true;
-        }else if(!isEmailValid(email)){
+        } else if (!isEmailValid(email)) {
             emailET.setError("Invalid email address");
             focusView = emailET;
             cancel = true;
@@ -106,21 +94,16 @@ public class SignUpActivity extends AppCompatActivity {
             focusView = passwordET;
             cancel = true;
         }
-        if(type.equals("employee") && TextUtils.isEmpty(stringWage)){
-            wageET.setError("this field is required");
-            focusView = wageET;
-            cancel = true;
-        }
-        if(cancel){
+        if (cancel) {
             focusView.requestFocus();
-        }else {
+        } else {
             showProgressBar(true);
-            signUp(name,email,password,wage,type);
+            signUp(name, email, password, wage);
         }
     }
 
 
-    private void signUp(final String name, final String email,final String password,final double wage,final String type){
+    private void signUp(final String name, final String email, final String password, final double wage) {
         //firebase auth
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -134,9 +117,9 @@ public class SignUpActivity extends AppCompatActivity {
                                     .setDisplayName(name).build();
                             user.updateProfile(profileUpdates);
                             //add user to db
-                            DBHelper.addUser(name,email,wage,type,user.getUid());
+                            DBHelper.addUser(name, email, wage);
                             //return to mainActivity
-                            Intent MainActivityIntent = new Intent(SignUpActivity.this,MainActivity.class);
+                            Intent MainActivityIntent = new Intent(SignUpActivity.this, MainActivity.class);
                             startActivity(MainActivityIntent);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -148,7 +131,8 @@ public class SignUpActivity extends AppCompatActivity {
                     }
                 });
     }
-    private void showProgressBar(final boolean show){
+
+    private void showProgressBar(final boolean show) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
             signUpForm.setVisibility(show ? View.GONE : View.VISIBLE);
@@ -167,30 +151,28 @@ public class SignUpActivity extends AppCompatActivity {
                     progressView.setVisibility(show ? View.VISIBLE : View.GONE);
                 }
             });
-        }else{
+        } else {
             progressView.setVisibility(show ? View.VISIBLE : View.GONE);
             signUpForm.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
-    protected String getType(RadioGroup profileType){
-        int id = profileType.getCheckedRadioButtonId();
-        RadioButton rb = (RadioButton) findViewById(id);
-        return rb.getText().toString();
-    }
-    protected  boolean isWageValid(String wage){
-        try{
+
+    protected boolean isWageValid(String wage) {
+        try {
             double price = Double.parseDouble(wage);
-            if(price >= 0)
+            if (price >= 0)
                 return true;
             else
                 return false;
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             return false;
         }
     }
+
     private boolean isEmailValid(String email) {
         return email.contains("@");
     }
+
     private boolean isPasswordValid(String password) {
         return password.length() > 4;
     }
